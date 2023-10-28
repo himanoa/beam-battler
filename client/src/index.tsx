@@ -15,7 +15,7 @@ function Root(): JSX.Element {
 
 function App(): JSX.Element {
   return (
-    <div className={cls.container}>
+    <div className={`${cls.container} ${cls.theme}`}>
       <SceneRenderer />
     </div>
   )
