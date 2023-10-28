@@ -1,18 +1,7 @@
 import { useLayoutEffect, useMemo, useRef } from 'react'
 import cls from './style.module.css'
 import { Shooter, computeFillColor, getStartPoint, makePointsIter } from '../../models/shooter'
-
-class Cell<T> {
-  constructor(private innerValue: T) {}
-
-  replace(data: T): void {
-    this.innerValue = data
-  }
-
-  get value(): T {
-    return this.innerValue
-  }
-}
+import { Cell } from '../../utils/cell'
 
 export function Game() {
   const ref = useRef<HTMLCanvasElement>(null)
@@ -27,10 +16,6 @@ export function Game() {
     if(canvasContext == null) {
       return 
     }
-    canvasContext.imageSmoothingEnabled = true
-    canvasContext.scale(window.devicePixelRatio, window.devicePixelRatio)
-    canvasDom.width *= window.devicePixelRatio
-    canvasDom.height *= window.devicePixelRatio
 
     const animationFrameId = requestAnimationFrame(() => main(animationFrameIdCell, canvasContext))
     animationFrameIdCell.replace(animationFrameId)
