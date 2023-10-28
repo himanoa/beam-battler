@@ -8,12 +8,12 @@
     "plugin:@typescript-eslint/recommended",
     "prettier"
     ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-      "sourceType": "module",
-      "project": "./tsconfig.json"
-    },
-    "plugins": [
-      "@typescript-eslint"
-    ]
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ]
 }

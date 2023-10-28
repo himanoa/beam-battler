@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "vitest",
+    "build": "vite",
+    "dev": "vite dev",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "format": "prettier --write src/*",
     "check:format": "prettier --write src/*",
     "lint": "eslint src/*.ts src/*.tsx"
@@ -17,8 +20,11 @@
     "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "@types/react": "18.2.33",
+    "@types/react-dom": "18.2.14",
     "@typescript-eslint/eslint-plugin": "6.9.0",
     "@typescript-eslint/parser": "6.9.0",
+    "@vitejs/plugin-react": "4.1.0",
     "eslint": "8.52.0",
     "eslint-config-prettier": "9.0.0",
     "prettier": "3.0.3",
