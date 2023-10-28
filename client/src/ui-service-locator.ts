@@ -6,6 +6,7 @@ import { SceneController } from "./scene";
 export type UiServiceLocator =  {
   sceneController: SceneController,
   sceneAtom: SceneAtom,
-  visibleEntityRepository: VisibleEntityRepository<Renderable>
+  visibleEntityRepository: VisibleEntityRepository<Renderable>,
+  kernel: Kernel
 }
 

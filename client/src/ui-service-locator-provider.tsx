@@ -8,7 +8,8 @@ type Props = { children: React.ReactNode }
 export const uiServiceLocator: UiServiceLocator = {
   sceneController: applicationServiceLocator.sceneController,
   sceneAtom: createSceneAtom(applicationServiceLocator.sceneController),
-  visibleEntityRepository: applicationServiceLocator.visibleEntityRepository
+  visibleEntityRepository: applicationServiceLocator.visibleEntityRepository,
+  kernel: applicationServiceLocator.kernel
 }
 
 export function UiServiceLocatorProvider({children}: Props): JSX.Element {

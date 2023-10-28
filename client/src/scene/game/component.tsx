@@ -8,7 +8,9 @@ import { useUiServiceLocator } from '../../ui-service-locator-context'
 export function Game() {
   const ref = useRef<HTMLCanvasElement>(null)
   const animationFrameIdCell = useMemo(() => new Cell<number | null>(null), [])
-  const { visibleEntityRepository } = useUiServiceLocator()
+  const {
+    kernel
+  } = useUiServiceLocator()
 
   useLayoutEffect(() => {
     const canvasDom = ref.current
@@ -20,34 +22,13 @@ export function Game() {
       return 
     }
 
-    const animationFrameId = requestAnimationFrame(() => main(
-      animationFrameIdCell,
-      visibleEntityRepository,
-      canvasContext
-    ))
+    kernel.start(canvasContext)
 
-    animationFrameIdCell.replace(animationFrameId)
-    return () => {
-      if(animationFrameIdCell.value !== null) {
-        cancelAnimationFrame(animationFrameIdCell.value)
-      }
-    }
+    return () => kernel.cleanUp()
   }, [ref, animationFrameIdCell])
 
   return (
     <canvas id="game" className={cls.game} ref={ref} width={1920} height={1080}>
     </canvas>
   )
-}
-
-function main(
-  animationFrameIdCell: Cell<number | null>,
-  visibleEntityRepository: VisibleEntityRepository<Renderable>,
-  ctx: CanvasRenderingContext2D
-): void {
-  for(const entity of visibleEntityRepository) {
-    entity.render(ctx)
-  }
-  const animationFrameId = requestAnimationFrame(() => main(animationFrameIdCell, visibleEntityRepository, ctx))
-  animationFrameIdCell.replace(animationFrameId)
 }
