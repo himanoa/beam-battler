@@ -8,16 +8,16 @@ export class SceneControllerImpl implements SceneController {
 
   constructor() {}
 
-  gotoTitle() {
-    this.scene = 'title'
-    this.stream.next('title')
-  }
-
   get currrentScene() {
     return this.scene
   }
 
   get observable() {
     return this.stream.observable
+  }
+
+  transitionTo(scene: Scene) {
+    this.scene = scene
+    this.stream.next(scene)
   }
 }
