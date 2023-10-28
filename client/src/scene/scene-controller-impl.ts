@@ -1,20 +1,19 @@
 import { SceneController } from "./scene-controller";
 import { Scene } from ".";
 import PushStream from 'zen-push'
-import Observable from "zen-observable";
 
 export class SceneControllerImpl implements SceneController {
-  private stream: PushStream<Scene>
+  private stream: PushStream<Scene> = new PushStream()
+  private scene: Scene = 'title' 
 
-  constructor() {
-    this.stream = new PushStream<Scene>()
-  }
-
-  get observable(): Observable<Scene> {
-    return this.stream.observable
-  }
+  constructor() {}
 
   gotoTitle() {
+    this.scene = 'title'
     this.stream.next('title')
+  }
+
+  get currrentScene() {
+    return this.scene
   }
 }

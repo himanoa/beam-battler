@@ -1,6 +1,6 @@
-import { ServiceLocator } from "./DIContext";
+import { ServiceLocator } from "./di-context";
 import { SceneControllerImpl } from "./scene";
 
-export const serviceLocator: ServiceLocator = {
+export const applicationServiceLocator: ServiceLocator = {
   sceneController: new SceneControllerImpl()
 }

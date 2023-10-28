@@ -1,8 +1,6 @@
 import { createRoot } from 'react-dom/client'
 import cls from './index.module.css'
-import { Provider } from 'jotai'
-import { ApplicationDIContextProvider } from './ApplicationDIContextProvider'
-import { useDIContext } from './DIContext'
+import { ApplicationDIContextProvider } from './application-di-context-provider'
 
 const el = document.querySelector('#app')
 
@@ -15,13 +13,9 @@ function Root(): JSX.Element {
 }
 
 function App(): JSX.Element {
-  const { store } = useDIContext()
-
   return (
-    <Provider store={store}>
-      <div className={cls.container}>
-      </div>
-    </Provider>
+    <div className={cls.container}>
+    </div>
   )
 }
 

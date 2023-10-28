@@ -1,8 +1,10 @@
-import { atom } from "jotai";
-import { Scene } from "../scene";
+import { Atom, atom } from "jotai";
+import { Scene, SceneController } from "../scene";
 import Observable from "zen-observable";
 
-export const createSceneAtom = (stream: Observable<Scene>) => {
+export type SceneAtom = Atom<Scene>
+
+export const createSceneAtom = (sceneController: SceneController): SceneAtom => {
   const a = atom<Scene | null>(null)
   a.onMount = (set) => {
     const subscription = stream.subscribe((nextScene) => {

@@ -1,13 +1,14 @@
 import { useAtom } from "jotai"
-import { useDIContext } from "../DIContext"
+import { useDIContext } from "../di-context"
 import { Title } from "./title/component"
 
 export function SceneRender(): JSX.Element {
-  const { sceneManager } =  useDIContext()
+  const { sceneController } =  useDIContext()
   const [scene] = useAtom(sceneManager.sceneAtom)
 
   switch(scene) {
     case 'title':
       return <Title />
+    
   }
 }

@@ -8,7 +8,7 @@ export type ServiceLocator = {
 export const DIContext =  createContext<ServiceLocator | null>(null)
 
 export const useDIContext = () => {
-  const locator = useContext(DIContext)
+  const locator= useContext(DIContext)
   if(locator == null) {
     throw new Error("locator is not provided")
   }
