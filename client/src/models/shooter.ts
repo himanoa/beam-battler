@@ -1,11 +1,9 @@
 import { Direction } from "./direction"
-import { HitBox } from "./hit-box"
 import { Vector2 } from "./vector2"
 
 export type Shooter = {
   cordinate: Vector2
   areaLength: number
-  hitBox: HitBox,
   direction: Direction,
   playerNumber: 1 | 2 | 3 | 4
 }
@@ -27,6 +25,7 @@ export function getStartPoint(s: Shooter): Vector2 {
     }
   }
 }
+
 export function *makePointsIter(s: Shooter): Generator<Vector2> {
   const [x,y] = s.cordinate
   switch(s.direction) {

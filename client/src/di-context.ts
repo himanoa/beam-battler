@@ -1,7 +1,10 @@
 import { createContext, useContext } from "react";
 import { SceneController } from "./scene";
+import { VisibleEntityRepository } from "./application/repository/visible-entity-repository";
+import { Renderable } from "./models/renderable";
 
 export type ServiceLocator = {
+  visibleEntityRepository: VisibleEntityRepository<Renderable>,
   sceneController: SceneController
 }
 

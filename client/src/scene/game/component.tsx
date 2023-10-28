@@ -1,11 +1,14 @@
 import { useLayoutEffect, useMemo, useRef } from 'react'
 import cls from './style.module.css'
-import { Shooter, computeFillColor, getStartPoint, makePointsIter } from '../../models/shooter'
 import { Cell } from '../../utils/cell'
+import { VisibleEntityRepository } from '../../application/repository/visible-entity-repository'
+import { Renderable } from '../../models/renderable'
+import { useUiServiceLocator } from '../../ui-service-locator-context'
 
 export function Game() {
   const ref = useRef<HTMLCanvasElement>(null)
   const animationFrameIdCell = useMemo(() => new Cell<number | null>(null), [])
+  const { visibleEntityRepository } = useUiServiceLocator()
 
   useLayoutEffect(() => {
     const canvasDom = ref.current
@@ -17,7 +20,12 @@ export function Game() {
       return 
     }
 
-    const animationFrameId = requestAnimationFrame(() => main(animationFrameIdCell, canvasContext))
+    const animationFrameId = requestAnimationFrame(() => main(
+      animationFrameIdCell,
+      visibleEntityRepository,
+      canvasContext
+    ))
+
     animationFrameIdCell.replace(animationFrameId)
     return () => {
       if(animationFrameIdCell.value !== null) {
@@ -32,32 +40,14 @@ export function Game() {
   )
 }
 
-function main(animationFrameIdCell: Cell<number | null>, ctx: CanvasRenderingContext2D): void {
-  const player: Shooter = {
-    cordinate: [100, 100],
-    areaLength: 30,
-    hitBox: {
-      cordinate: [100, 100],
-      radius: 10
-    },
-    direction: 'bottom',
-    playerNumber: 2
+function main(
+  animationFrameIdCell: Cell<number | null>,
+  visibleEntityRepository: VisibleEntityRepository<Renderable>,
+  ctx: CanvasRenderingContext2D
+): void {
+  for(const entity of visibleEntityRepository) {
+    entity.render(ctx)
   }
-
-  ctx.lineWidth = 2;
-
-  const startPoint = getStartPoint(player)
-  ctx.beginPath();
-  ctx.moveTo(...startPoint)
-  ctx.fillStyle = computeFillColor(player)
-
-  for(const point of makePointsIter(player)) {
-    ctx.lineTo(...point)
-  }
-
-  ctx.stroke()
-  ctx.fill()
-  
-  const animationFrameId = requestAnimationFrame(() => main(animationFrameIdCell, ctx))
+  const animationFrameId = requestAnimationFrame(() => main(animationFrameIdCell, visibleEntityRepository, ctx))
   animationFrameIdCell.replace(animationFrameId)
 }
