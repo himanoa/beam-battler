@@ -1,20 +1,22 @@
 import { createRoot } from 'react-dom/client'
 import cls from './index.module.css'
-import { ApplicationDIContextProvider } from './application-di-context-provider'
+import { UiServiceLocatorProvider } from './ui-service-locator-provider'
+import { SceneRenderer } from './scene'
 
 const el = document.querySelector('#app')
 
 function Root(): JSX.Element {
   return (
-    <ApplicationDIContextProvider>
+    <UiServiceLocatorProvider>
       <App />
-    </ApplicationDIContextProvider>
+    </UiServiceLocatorProvider>
   )
 }
 
 function App(): JSX.Element {
   return (
     <div className={cls.container}>
+      <SceneRenderer />
     </div>
   )
 }

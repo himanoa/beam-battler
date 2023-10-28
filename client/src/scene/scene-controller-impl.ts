@@ -16,4 +16,8 @@ export class SceneControllerImpl implements SceneController {
   get currrentScene() {
     return this.scene
   }
+
+  get observable() {
+    return this.stream.observable
+  }
 }
