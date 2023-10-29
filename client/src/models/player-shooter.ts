@@ -19,24 +19,29 @@ export class PlayerShooter implements Renderable {
     this._id = id
   }
 
+  changeDirection(d: Direction) {
+    this.shooter.direction = d
+    return this
+  }
+
   move(direction: Direction): PlayerShooter {
     // TODO: 当たり判定などを判定して移動先を決定しないといけないので、ここにある実装は後々作り直す
-    console.dir(direction)
+    const speedNormalizeNumber = 0.7071
     return match(direction)
       .with('top-left', () => {
-        this.shooter.cordinate = addVector(this.shooter.cordinate, [-this.moveSpeed / 2, -this.moveSpeed /2])
+        this.shooter.cordinate = addVector(this.shooter.cordinate, [-this.moveSpeed * speedNormalizeNumber, -this.moveSpeed * speedNormalizeNumber])
         return this
       })
       .with('top-right', () => {
-        this.shooter.cordinate = addVector(this.shooter.cordinate, [this.moveSpeed / 2, -this.moveSpeed /2])
+        this.shooter.cordinate = addVector(this.shooter.cordinate, [this.moveSpeed * speedNormalizeNumber, -this.moveSpeed *speedNormalizeNumber])
         return this
       })
       .with('bottom-left', () => {
-        this.shooter.cordinate = addVector(this.shooter.cordinate, [-this.moveSpeed / 2, this.moveSpeed /2])
+        this.shooter.cordinate = addVector(this.shooter.cordinate, [-this.moveSpeed * speedNormalizeNumber, this.moveSpeed *speedNormalizeNumber])
         return this
       })
       .with('bottom-right', () => {
-        this.shooter.cordinate = addVector(this.shooter.cordinate, [this.moveSpeed / 2, this.moveSpeed /2])
+        this.shooter.cordinate = addVector(this.shooter.cordinate, [this.moveSpeed * speedNormalizeNumber, this.moveSpeed *speedNormalizeNumber])
         return this
       })
       .with('top', () => {

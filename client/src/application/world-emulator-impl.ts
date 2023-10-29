@@ -25,6 +25,9 @@ export class WorldEmulatorImpl implements WorldEmulator {
 
     this.playerStream.subscribe((e) => {
       this.playerRepository.store(match(e)
+        .with({ kind: 'playerChangeDirection' }, ({payload}) => {
+          return player.changeDirection(payload)
+        })
         .with({ kind: 'playerMoveUp' }, () => {
           return player.move('top')
         })

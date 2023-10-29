@@ -53,6 +53,18 @@ export function *makePointsIter(s: Shooter): Generator<Vector2> {
       yield [x + s.areaLength, y - s.areaLength]
       break
     }
+    case 'bottom-left': {
+      yield [x + s.areaLength, y + s.areaLength]
+      yield [x - s.areaLength / 2, y - s.areaLength]
+      yield [x - s.areaLength, y + s.areaLength]
+      break
+    }
+    case 'bottom-right': {
+      yield [x - s.areaLength, y + s.areaLength]
+      yield [x + s.areaLength / 2, y - s.areaLength]
+      yield [x + s.areaLength, y + s.areaLength]
+      break
+    }
     case 'left': {
       yield [x + s.areaLength, y - s.areaLength]
       yield [x + s.areaLength, y + s.areaLength]
@@ -75,18 +87,6 @@ export function *makePointsIter(s: Shooter): Generator<Vector2> {
       yield [x - s.areaLength, y - s.areaLength]
       yield [x + s.areaLength, y - s.areaLength]
       yield [x, y + s.areaLength]
-      break
-    }
-    case 'bottom-left': {
-      yield [x - s.areaLength, y + s.areaLength]
-      yield [x + s.areaLength / 2, y + s.areaLength]
-      yield [x - s.areaLength, y + s.areaLength]
-      break
-    }
-    case 'bottom-right': {
-      yield [x + s.areaLength, y + s.areaLength]
-      yield [x - s.areaLength / 2, y + s.areaLength]
-      yield [x - s.areaLength, y + s.areaLength]
       break
     }
   }
