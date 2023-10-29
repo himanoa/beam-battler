@@ -1,6 +1,8 @@
 import { Direction } from "./direction"
 
-type GameAction<K extends string, P = unknown> = {
+type GameAction<K extends string, P = null> = P extends null ?  {
+  kind: K,
+} : {
   kind: K,
   payload: P
 }
@@ -10,6 +12,10 @@ type PlayerActionsMap = {
   playerMoveUp: GameAction<'playerMoveUp'>
   playerMoveRight: GameAction<'playerMoveRight'>
   playerMoveleft: GameAction<'playerMoveLeft'>
+  playerMoveUpLeft: GameAction<'playerMoveUpLeft'>
+  playerMoveUpRight: GameAction<'playerMoveUpRight'>
+  playerMoveDownLeft: GameAction<'playerMoveDownLeft'>
+  playerMoveDownRight: GameAction<'playerMoveDownRight'>
   playerChangeDirection: GameAction<'playerChangeDirection', Direction>
   playerStop: GameAction<'playerStop'>
 }

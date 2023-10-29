@@ -12,10 +12,6 @@ export class VisibleEntityRepositoryImpl<T extends Renderable> implements Visibl
     this.stateMap.delete(id)
   }
 
-  update(id: string, e: T) {
-    this.stateMap.set(id, e)
-  }
-
   resolve(id: string) {
     this.stateMap.get(id)
   }
