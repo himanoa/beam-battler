@@ -1,8 +1,6 @@
 import { useLayoutEffect, useMemo, useRef } from 'react'
 import cls from './style.module.css'
 import { Cell } from '../../utils/cell'
-import { VisibleEntityRepository } from '../../application/repository/visible-entity-repository'
-import { Renderable } from '../../models/renderable'
 import { useUiServiceLocator } from '../../ui-service-locator-context'
 
 export function Game() {

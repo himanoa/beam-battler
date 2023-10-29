@@ -11,6 +11,12 @@ export type Shooter = {
 export function getStartPoint(s: Shooter): Vector2 {
   const [x,y] = s.cordinate
   switch(s.direction) {
+    case 'top-left': {
+      return [x - s.areaLength, y - s.areaLength]
+    }
+    case 'top-right': {
+      return [x + s.areaLength, y - s.areaLength]
+    }
     case 'left': {
       return [x - s.areaLength, y]
     }
@@ -23,38 +29,64 @@ export function getStartPoint(s: Shooter): Vector2 {
     case 'bottom': {
       return [x, y + s.areaLength]
     }
+    case 'bottom-left': {
+      return [x - s.areaLength, y + s.areaLength]
+    }
+    case 'bottom-right': {
+      return [x + s.areaLength, y + s.areaLength]
+    }
   }
 }
 
 export function *makePointsIter(s: Shooter): Generator<Vector2> {
   const [x,y] = s.cordinate
   switch(s.direction) {
+    case 'top-left': {
+      yield [x + s.areaLength, y - s.areaLength]
+      yield [x - s.areaLength / 2, y + s.areaLength]
+      yield [x - s.areaLength, y - s.areaLength]
+      break
+    }
+    case 'top-right': {
+      yield [x - s.areaLength, y - s.areaLength]
+      yield [x + s.areaLength / 2, y + s.areaLength]
+      yield [x + s.areaLength, y - s.areaLength]
+      break
+    }
     case 'left': {
-      yield [x - s.areaLength, y]
       yield [x + s.areaLength, y - s.areaLength]
       yield [x + s.areaLength, y + s.areaLength]
       yield [x - s.areaLength, y]
       break
     }
     case 'right': {
-      yield [x + s.areaLength, y]
       yield [x - s.areaLength, y - s.areaLength]
       yield [x - s.areaLength, y + s.areaLength]
       yield [x + s.areaLength, y]
       break
     }
     case 'top': {
-      yield [x, y - s.areaLength]
       yield [x - s.areaLength, y + s.areaLength]
       yield [x + s.areaLength, y + s.areaLength]
       yield [x, y - s.areaLength]
       break
     }
     case 'bottom': {
-      yield [x, y + s.areaLength]
       yield [x - s.areaLength, y - s.areaLength]
       yield [x + s.areaLength, y - s.areaLength]
       yield [x, y + s.areaLength]
+      break
+    }
+    case 'bottom-left': {
+      yield [x - s.areaLength, y + s.areaLength]
+      yield [x + s.areaLength / 2, y + s.areaLength]
+      yield [x - s.areaLength, y + s.areaLength]
+      break
+    }
+    case 'bottom-right': {
+      yield [x + s.areaLength, y + s.areaLength]
+      yield [x - s.areaLength / 2, y + s.areaLength]
+      yield [x - s.areaLength, y + s.areaLength]
       break
     }
   }
