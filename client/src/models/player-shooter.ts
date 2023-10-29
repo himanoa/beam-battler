@@ -46,7 +46,6 @@ export class PlayerShooter implements Renderable {
       })
       .with('top', () => {
         this.shooter.cordinate = addVector(this.shooter.cordinate, [0, -this.moveSpeed])
-        console.dir(this.shooter.cordinate)
         return this
       })
       .with('bottom', () => {
