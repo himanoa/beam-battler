@@ -35,8 +35,11 @@ export class PlayerShooter implements Renderable {
   }
 
   move(direction: Direction): PlayerShooter {
-    // TODO: 当たり判定などを判定して移動先を決定しないといけないので、ここにある実装は後々作り直す
-    const speedNormalizeNumber = 0.7071;
+    // NOTE:
+    // 斜め移動を愚直に実装(横方向にも縦方向にもspeed分だけ可算)すると、斜め移動だけ早くなってしまう
+    // その対策で斜め移動の時のみ0.71の移動係数をかけてあげる
+    const speedNormalizeNumber = 0.71;
+
     return match(direction)
       .with("top-left", () => {
         this.shooter.cordinate = addVector(this.shooter.cordinate, [
@@ -97,6 +100,7 @@ export class PlayerShooter implements Renderable {
       .exhaustive();
   }
 
+  // 責務が怪しいシリーズ
   renderShotoer(ctx: CanvasRenderingContext2D) {
     const startPoint = getStartPoint(this.shooter);
 
@@ -132,6 +136,7 @@ export class PlayerShooter implements Renderable {
     this.renderShotoer(ctx);
     this.renderHitBox(ctx);
   }
+  // 責務が怪しいシリーズここまで
 
   get id() {
     return this._id;
