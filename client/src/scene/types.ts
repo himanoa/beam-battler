@@ -1,1 +1,1 @@
-export type Scene = 'title' | 'game'
+export type Scene = "title" | "game";

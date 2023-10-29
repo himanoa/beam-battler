@@ -6,15 +6,17 @@ import { WorldEmulatorImpl } from "./application/world-emulator-impl";
 import { ServiceLocator } from "./di-context";
 import { SceneControllerImpl } from "./scene";
 
-const visibleEntityRepository = new VisibleEntityRepositoryImpl()
-const sceneController = new SceneControllerImpl()
-const keyboardInputStream = new KeyboardInputStreamImpl()
-const playerController = new PlayerControllerImpl(keyboardInputStream.observable)
+const visibleEntityRepository = new VisibleEntityRepositoryImpl();
+const sceneController = new SceneControllerImpl();
+const keyboardInputStream = new KeyboardInputStreamImpl();
+const playerController = new PlayerControllerImpl(
+  keyboardInputStream.observable,
+);
 
 const worldEmulator = new WorldEmulatorImpl(
   visibleEntityRepository,
-  playerController.observable
-)
+  playerController.observable,
+);
 
 export const applicationServiceLocator: ServiceLocator = {
   visibleEntityRepository: visibleEntityRepository,
@@ -23,6 +25,6 @@ export const applicationServiceLocator: ServiceLocator = {
     visibleEntityRepository,
     keyboardInputStream,
     playerController,
-    worldEmulator
-  )
-}
+    worldEmulator,
+  ),
+};

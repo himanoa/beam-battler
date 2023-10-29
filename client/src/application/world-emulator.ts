@@ -1,4 +1,4 @@
 export interface WorldEmulator {
-  emulate(): void
-  closeEmulator(): void
+  emulate(): void;
+  closeEmulator(): void;
 }
