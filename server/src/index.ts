@@ -11,6 +11,10 @@ app.use('*', prettyJSON())
 app.use('*', logger())
 app.use('*', cors())
 
+app.get('*', async (c) => {
+	return c.json({}, 404)
+})
+
 app.route('/', hc)
 
 export default app
