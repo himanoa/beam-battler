@@ -5,13 +5,22 @@
   "scripts": {
     "deploy": "wrangler deploy",
     "dev": "wrangler dev",
-    "start": "wrangler dev"
+    "start": "wrangler dev",
+    "format": "prettier --write src/**/*.ts src/**/*.tsx src/*.ts src/*.tsx",
+    "format:check": "prettier --check src/**/*.ts src/**/*.tsx src/*.ts src/*.tsx",
+    "lint": "eslint src/*.ts src/*.tsx",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20230419.0",
     "hono": "^3.9.0",
     "typescript": "^5.0.4",
-    "wrangler": "^3.0.0"
+    "wrangler": "^3.0.0",
+    "@typescript-eslint/eslint-plugin": "6.9.0",
+    "@typescript-eslint/parser": "6.9.0",
+    "eslint": "8.52.0",
+    "eslint-config-prettier": "9.0.0",
+    "prettier": "3.0.3"
   },
   "dependencies": {
     "@kanamone/scrambler": "0.0.9"

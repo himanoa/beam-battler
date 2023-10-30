@@ -81,9 +81,24 @@ importers:
       '@cloudflare/workers-types':
         specifier: ^4.20230419.0
         version: 4.20231025.0
+      '@typescript-eslint/eslint-plugin':
+        specifier: 6.9.0
+        version: 6.9.0(@typescript-eslint/parser@6.9.0)(eslint@8.52.0)(typescript@5.2.2)
+      '@typescript-eslint/parser':
+        specifier: 6.9.0
+        version: 6.9.0(eslint@8.52.0)(typescript@5.2.2)
+      eslint:
+        specifier: 8.52.0
+        version: 8.52.0
+      eslint-config-prettier:
+        specifier: 9.0.0
+        version: 9.0.0(eslint@8.52.0)
       hono:
         specifier: ^3.9.0
         version: 3.9.0
+      prettier:
+        specifier: 3.0.3
+        version: 3.0.3
       typescript:
         specifier: ^5.0.4
         version: 5.2.2
