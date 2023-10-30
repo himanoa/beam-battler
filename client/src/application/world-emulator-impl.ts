@@ -1,18 +1,19 @@
 import Observable from "zen-observable";
-import { PlayerActions } from "../models/game-actions";
+import { PlayerActions } from "../models/player-actions";
 import { PlayerShooter } from "../models/player-shooter";
 import { VisibleEntityRepository } from "./repository/visible-entity-repository";
 import { WorldEmulator } from "./world-emulator";
 import { match } from "ts-pattern";
-import { Renderable } from "../models/renderable";
+import { ColideEvent } from "./collision-simulator";
 
 export class WorldEmulatorImpl implements WorldEmulator {
   private subscription: ReturnType<Observable<object>["subscribe"]> | null =
     null;
 
   constructor(
-    private playerRepository: VisibleEntityRepository<Renderable>,
+    private playerRepository: VisibleEntityRepository,
     private playerStream: Observable<PlayerActions>,
+    private onColide: Observable<ColideEvent>
   ) {}
 
   emulate() {
@@ -56,6 +57,10 @@ export class WorldEmulatorImpl implements WorldEmulator {
           .otherwise(() => player),
       );
     });
+
+    this.onColide.subscribe(() => {
+      console.error("unimplemented colide handle")
+    })
   }
 
   closeEmulator() {

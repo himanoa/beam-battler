@@ -7,3 +7,7 @@ export type Direction =
   | "bottom"
   | "bottom-left"
   | "bottom-right";
+
+export const reverseDirection = (d: Direction): Direction => {
+  throw new Error("unimplemented")
+}

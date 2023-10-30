@@ -1,7 +1,7 @@
 import Observable from "zen-observable";
 import { PlayerController } from "./player-controller";
 import { KeyboardState } from "../models/keyboard-input";
-import { PlayerActions } from "../models/game-actions";
+import { PlayerActions } from "../models/player-actions";
 import PushStream from "zen-push";
 import { match } from "ts-pattern";
 

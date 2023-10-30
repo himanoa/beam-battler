@@ -12,6 +12,15 @@ export const addVector: (v1: Vector2, v2: Vector2) => Vector2 = (v1, v2) => {
   return map(v1, (v1) => [v1[0] + v2[0], v1[1] + v2[1]]);
 };
 
+export const subVector: (v1: Vector2, v2: Vector2) => Vector2 = (v1, v2) => {
+  return map(v1, (v1) => [v1[0] - v2[0], v1[1] - v2[1]]);
+};
+
 export const divVector: (v1: Vector2, v2: Vector2) => Vector2 = (v1, v2) => {
   return map(v1, (v1) => [v1[0] / v2[0], v1[1] / v2[1]]);
 };
+
+export const distance: (v1: Vector2, v2: Vector2) => number = (v1, v2) => {
+  const c = subVector(v1, v2)
+  return map(c, ([x,y]) => Math.sqrt(x * x) + (y * y))
+}

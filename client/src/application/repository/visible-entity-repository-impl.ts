@@ -1,7 +1,10 @@
+import { HasCollider } from "../../models/has-collider";
 import { Renderable } from "../../models/renderable";
 import { VisibleEntityRepository } from "./visible-entity-repository";
 
-export class VisibleEntityRepositoryImpl<T extends Renderable>
+interface X extends Renderable, HasCollider {}
+
+export class VisibleEntityRepositoryImpl<T extends X>
   implements VisibleEntityRepository<T>
 {
   constructor(private stateMap: Map<string, T> = new Map()) {}

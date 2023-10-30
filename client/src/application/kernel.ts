@@ -1,4 +1,3 @@
-import { Renderable } from "../models/renderable";
 import { Cell } from "../utils/cell";
 import { KeyboardInputStream } from "./keyboard-input-stream";
 import { PlayerController } from "./player-controller";
@@ -9,7 +8,7 @@ export class Kernel {
   private animationFrameIdCell: Cell<number | null> = new Cell(null);
 
   constructor(
-    private visibleEntityRepository: VisibleEntityRepository<Renderable>,
+    private visibleEntityRepository: VisibleEntityRepository,
     private keyboardInputStream: KeyboardInputStream,
     private playerController: PlayerController,
     private worldEmulator: WorldEmulator,

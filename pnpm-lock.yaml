@@ -13,6 +13,9 @@ importers:
       jotai:
         specifier: 2.5.0
         version: 2.5.0(@types/react@18.2.33)(react@18.2.0)
+      lodash.combinations:
+        specifier: 18.11.1
+        version: 18.11.1(lodash@4.17.21)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -1554,9 +1557,25 @@ packages:
       p-locate: 5.0.0
     dev: true
 
+  /lodash.combinations@18.11.1(lodash@4.17.21):
+    resolution: {integrity: sha512-0jtulyUQA1My13JuMR23MHqsMk8pQswcy+fO0jTKRp41bi+dDWflv/Ct4qRW6CcbLkk2Qi3PZyzx+tqgqSYLug==}
+    peerDependencies:
+      '@types/lodash': ^4
+      lodash: ^4
+    peerDependenciesMeta:
+      '@types/lodash':
+        optional: true
+    dependencies:
+      lodash: 4.17.21
+    dev: false
+
   /lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
     dev: true
+
+  /lodash@4.17.21:
+    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
+    dev: false
 
   /loose-envify@1.4.0:
     resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}

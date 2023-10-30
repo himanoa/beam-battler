@@ -8,9 +8,12 @@ import {
   makePointsIter,
 } from "./shooter";
 import { Vector2, addVector, divVector } from "./vector2";
-import { HitBox } from "./hit-box";
+import { CircleHitBox } from "./hit-box";
+import { HasCollider } from "./has-collider";
 
-export class PlayerShooter implements Renderable {
+interface X extends Renderable, HasCollider {}
+
+export class PlayerShooter implements X {
   private shooter: Shooter;
   private _id: string;
   private moveSpeed = 5;
@@ -142,7 +145,7 @@ export class PlayerShooter implements Renderable {
     return this._id;
   }
 
-  get hitBox(): HitBox {
+  get hitBox(): CircleHitBox {
     const point = divVector(
       Array.from(makePointsIter(this.shooter)).reduce(
         (acc, value) => addVector(acc, value),
@@ -152,8 +155,13 @@ export class PlayerShooter implements Renderable {
     );
 
     return {
+      kind: 'circle',
       cordinate: point,
       radius: 8,
     };
+  }
+
+  get collide() {
+    return this.hitBox
   }
 }
