@@ -1,11 +1,10 @@
-import { HasCollider } from "../../models/has-collider";
 import { Renderable } from "../../models/renderable";
 
-interface X extends Renderable, HasCollider {}
+interface Entities extends Renderable {}
 
-export interface VisibleEntityRepository<T extends X = X> {
+export interface VisibleEntityRepository<T extends Entities = Entities> {
   store(entity: T): void;
   drop(id: string): void;
-  resolve(id: string): void;
+  resolve(id: string): T | null;
   [Symbol.iterator](): IterableIterator<T>;
 }

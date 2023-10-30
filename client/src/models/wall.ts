@@ -1,3 +1,5 @@
 import { Line } from "./line";
 
-export type Wall = Line
+export class Wall extends Line {
+  lineWidth: number = 1;
+}

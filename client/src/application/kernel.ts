@@ -38,6 +38,8 @@ export class Kernel {
 
   private runMainLoop(canvasCtx: CanvasRenderingContext2D) {
     canvasCtx.clearRect(0, 0, canvasCtx.canvas.width, canvasCtx.canvas.height);
+    this.collisionSimulator.resolveColider()
+
     for (const entity of this.visibleEntityRepository) {
       entity.render(canvasCtx);
     }

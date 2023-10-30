@@ -10,6 +10,7 @@ export type LineHitBox = {
   kind: "line";
   cordinate1: Vector2;
   cordinate2: Vector2;
+  width: number
 };
 
 export type HitBox = CircleHitBox | LineHitBox;

@@ -18,7 +18,8 @@ export class VisibleEntityRepositoryImpl<T extends X>
   }
 
   resolve(id: string) {
-    this.stateMap.get(id);
+    const e =  this.stateMap.get(id);
+    return e !== undefined ? e : null
   }
 
   [Symbol.iterator](): IterableIterator<T> {

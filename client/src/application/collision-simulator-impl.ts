@@ -14,15 +14,15 @@ import {
   toDirection,
 } from "../models/player-actions";
 import Observable from "zen-observable";
-import { filter, fromObservable, subscribe, pipe, Subscription } from "wonka";
+import { filter, fromObservable, subscribe, pipe, Subscription, fromIterable, toArray } from "wonka";
 import { isPlayerMoveAction } from "../models/game-actions";
-import { reverseDirection } from "../models/direction";
-import { Cell } from "../utils/cell";
+import { flip, not } from "../models/direction";
+import { isMaterial } from "../models/material";
+import { isTeleportable } from "../models/movable";
 
 export class CollisionSimulatorImpl implements CollisionSimulator {
   private lastPlayerActions: PlayerMoveActions | null = null;
   private syncLastPlayerActionsSubscription: Subscription | null = null;
-  private animationFrameId: Cell<number | null> = new Cell(null);
   private colideStream: PushStream<ColideEvent> = new PushStream();
 
   constructor(
@@ -36,20 +36,12 @@ export class CollisionSimulatorImpl implements CollisionSimulator {
 
   startSimulation() {
     console.log("CollisionSimulator is start simulation");
-    this.animationFrameId.replace(
-      requestAnimationFrame(() => {
-        this.loop();
-      }),
-    );
     this.syncLastPlayerActions();
   }
 
   closeSimulation() {
     this.colideStream.complete();
     this.syncLastPlayerActionsSubscription?.unsubscribe();
-    if (this.animationFrameId.value != null) {
-      cancelAnimationFrame(this.animationFrameId.value);
-    }
   }
 
   syncLastPlayerActions() {
@@ -64,42 +56,34 @@ export class CollisionSimulatorImpl implements CollisionSimulator {
     const np = findNearestPointOnLine(b, a);
     const d = distance(a.cordinate, np);
 
-    return d <= a.radius;
+    return d  <= a.radius;
   }
 
-  loop() {
+  resolveColider() {
     for (const [a, b] of combinations(
-      Array.from(this.visibleEntityRepository),
+      pipe(fromIterable(this.visibleEntityRepository), filter(isMaterial) , toArray)
     )) {
+      const hanpatsu = 6
       if (
         a.collide.kind === "circle" &&
         b.collide.kind === "line" &&
+        isTeleportable(a) &&
         this.isCollided(a.collide, b.collide) &&
         this.lastPlayerActions != null
       ) {
-        this.colideStream.next({
-          a: a.id,
-          b: b.id,
-          moveEntityId: a.id,
-          direction: reverseDirection(toDirection(this.lastPlayerActions)),
-          size: a.collide.radius,
-        });
+        const dest = flip(a.collide.cordinate, not(toDirection(this.lastPlayerActions)), hanpatsu)
+        this.visibleEntityRepository.store(a.teleport(dest))
       }
       if (
         b.collide.kind === "circle" &&
         a.collide.kind === "line" &&
+        isTeleportable(b) &&
         this.isCollided(b.collide, a.collide) &&
         this.lastPlayerActions != null
       ) {
-        this.colideStream.next({
-          a: a.id,
-          b: b.id,
-          moveEntityId: b.id,
-          direction: reverseDirection(toDirection(this.lastPlayerActions)),
-          size: b.collide.radius,
-        });
+        const dest = flip(b.collide.cordinate, not(toDirection(this.lastPlayerActions)), hanpatsu)
+        this.visibleEntityRepository.store(b.teleport(dest))
       }
     }
-    this.animationFrameId.replace(requestAnimationFrame(() => this.loop()));
   }
 }
