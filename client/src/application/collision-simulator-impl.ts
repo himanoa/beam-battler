@@ -15,11 +15,11 @@ export class CollisionSimulatorImpl implements CollisionSimulator {
   private lastPlayerActions: PlayerMoveActions | null = null
   private syncLastPlayerActionsSubscription: Subscription | null =  null
   private animationFrameId: Cell<number | null> = new Cell(null) 
+  private colideStream: PushStream<ColideEvent> = new PushStream()
 
   constructor(
     private visibleEntityRepository: VisibleEntityRepository,
-    private colideStream: PushStream<ColideEvent> = new PushStream(),
-    private playerActions: Observable<PlayerActions>
+    private playerActions: Observable<PlayerActions>,
   ) {
   }
 
@@ -28,6 +28,7 @@ export class CollisionSimulatorImpl implements CollisionSimulator {
   }
 
   startSimulation() {
+    console.log("CollisionSimulator is start simulation")
     this.animationFrameId.replace(requestAnimationFrame(() => { this.loop() }))
     this.syncLastPlayerActions()
   }

@@ -7,7 +7,7 @@ export const isPlayerMoveAction = (a: GameActions): a is PlayerMoveActions => {
     "playerMoveDown",
     "playerMoveUp",
     "playerMoveRight",
-    "playerMoveleft",
+    "playerMoveLeft",
     "playerMoveUpLeft",
     "playerMoveUpRight",
     "playerMoveDownLeft",

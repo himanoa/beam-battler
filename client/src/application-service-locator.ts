@@ -1,3 +1,5 @@
+import { CollisionSimulator } from "./application/collision-simulator";
+import { CollisionSimulatorImpl } from "./application/collision-simulator-impl";
 import { Kernel } from "./application/kernel";
 import { KeyboardInputStreamImpl } from "./application/keyboard-input-stream-impl";
 import { PlayerControllerImpl } from "./application/player-controller-impl";
@@ -12,10 +14,15 @@ const keyboardInputStream = new KeyboardInputStreamImpl();
 const playerController = new PlayerControllerImpl(
   keyboardInputStream.observable,
 );
+const collisionSimulator: CollisionSimulator = new CollisionSimulatorImpl(
+  visibleEntityRepository,
+  playerController.observable
+)
 
 const worldEmulator = new WorldEmulatorImpl(
   visibleEntityRepository,
   playerController.observable,
+  collisionSimulator.onColide
 );
 
 export const applicationServiceLocator: ServiceLocator = {
@@ -26,5 +33,6 @@ export const applicationServiceLocator: ServiceLocator = {
     keyboardInputStream,
     playerController,
     worldEmulator,
+    collisionSimulator
   ),
 };

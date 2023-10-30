@@ -1,4 +1,5 @@
 import { Cell } from "../utils/cell";
+import { CollisionSimulator } from "./collision-simulator";
 import { KeyboardInputStream } from "./keyboard-input-stream";
 import { PlayerController } from "./player-controller";
 import { VisibleEntityRepository } from "./repository/visible-entity-repository";
@@ -12,10 +13,12 @@ export class Kernel {
     private keyboardInputStream: KeyboardInputStream,
     private playerController: PlayerController,
     private worldEmulator: WorldEmulator,
+    private collisionSimulator: CollisionSimulator
   ) {}
 
   start(canvasCtx: CanvasRenderingContext2D) {
     this.worldEmulator.emulate();
+    this.collisionSimulator.startSimulation();
     this.keyboardInputStream.startSubscription();
     this.playerController.startSubscription();
     this.runMainLoop(canvasCtx);
@@ -23,6 +26,7 @@ export class Kernel {
 
   cleanUp() {
     this.worldEmulator.closeEmulator();
+    this.collisionSimulator.startSimulation();
     this.keyboardInputStream.closeSubscription();
     this.playerController.closeSubscription();
 

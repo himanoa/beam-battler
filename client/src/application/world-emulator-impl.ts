@@ -1,10 +1,11 @@
 import Observable from "zen-observable";
-import { PlayerActions } from "../models/player-actions";
+import { PlayerActions, toDirection } from "../models/player-actions";
 import { PlayerShooter } from "../models/player-shooter";
 import { VisibleEntityRepository } from "./repository/visible-entity-repository";
 import { WorldEmulator } from "./world-emulator";
 import { match } from "ts-pattern";
 import { ColideEvent } from "./collision-simulator";
+import { isPlayerMoveAction } from "../models/game-actions";
 
 export class WorldEmulatorImpl implements WorldEmulator {
   private subscription: ReturnType<Observable<object>["subscribe"]> | null =
@@ -30,31 +31,12 @@ export class WorldEmulatorImpl implements WorldEmulator {
           .with({ kind: "playerChangeDirection" }, ({ payload }) => {
             return player.changeDirection(payload);
           })
-          .with({ kind: "playerMoveUp" }, () => {
-            return player.move("top");
-          })
-          .with({ kind: "playerMoveDown" }, () => {
-            return player.move("bottom");
-          })
-          .with({ kind: "playerMoveLeft" }, () => {
-            return player.move("left");
-          })
-          .with({ kind: "playerMoveRight" }, () => {
-            return player.move("right");
-          })
-          .with({ kind: "playerMoveUpLeft" }, () => {
-            return player.move("top-left");
-          })
-          .with({ kind: "playerMoveUpRight" }, () => {
-            return player.move("top-right");
-          })
-          .with({ kind: "playerMoveDownLeft" }, () => {
-            return player.move("bottom-left");
-          })
-          .with({ kind: "playerMoveDownRight" }, () => {
-            return player.move("bottom-right");
-          })
-          .otherwise(() => player),
+          .otherwise((e) => {
+            if(isPlayerMoveAction(e)) {
+              return player.move(toDirection(e))
+            }
+            return player
+          }),
       );
     });
 
