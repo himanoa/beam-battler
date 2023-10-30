@@ -6,9 +6,9 @@
     "deploy": "wrangler deploy",
     "dev": "wrangler dev",
     "start": "wrangler dev",
-    "format": "prettier --write src/**/*.ts src/**/*.tsx src/*.ts src/*.tsx",
-    "format:check": "prettier --check src/**/*.ts src/**/*.tsx src/*.ts src/*.tsx",
-    "lint": "eslint src/*.ts src/*.tsx",
+    "format": "prettier --write src/*.ts",
+    "format:check": "prettier --check src/*.ts",
+    "lint": "eslint src/*.ts",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
