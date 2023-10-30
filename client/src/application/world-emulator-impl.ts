@@ -21,10 +21,10 @@ export class WorldEmulatorImpl implements WorldEmulator {
   ) {}
 
   emulate() {
-    const entities = this.entities()
+    const entities = this.entities();
     const [player] = entities;
-    for(const e of entities) {
-      this.playerRepository.store(e)
+    for (const e of entities) {
+      this.playerRepository.store(e);
     }
 
     this.playerStream.subscribe((e) => {
@@ -42,13 +42,17 @@ export class WorldEmulatorImpl implements WorldEmulator {
       );
     });
 
-    this.onColide.subscribe(({ moveEntityId, direction,  size}) => {
-      const entity = this.playerRepository.resolve(moveEntityId)
-      if(entity == null || !isTeleportable(entity) || entity.collide.kind === 'line') {
-        return 
+    this.onColide.subscribe(({ moveEntityId, direction, size }) => {
+      const entity = this.playerRepository.resolve(moveEntityId);
+      if (
+        entity == null ||
+        !isTeleportable(entity) ||
+        entity.collide.kind === "line"
+      ) {
+        return;
       }
-      const dest = flip(entity.collide.cordinate, direction, size)
-      this.playerRepository.store(entity.teleport(dest))
+      const dest = flip(entity.collide.cordinate, direction, size);
+      this.playerRepository.store(entity.teleport(dest));
     });
   }
 
@@ -58,31 +62,11 @@ export class WorldEmulatorImpl implements WorldEmulator {
 
   entities(): [PlayerShooter, Wall, Wall, Wall, Wall] {
     return [
-      new PlayerShooter(
-        self.crypto.randomUUID(),
-        [100, 100],
-        "top",
-      ),
-      new Wall(
-        self.crypto.randomUUID(),
-        [0, 0],
-        [0, 1080],
-      ),
-      new Wall(
-        self.crypto.randomUUID(),
-        [0, 0],
-        [1920, 0],
-      ),
-      new Wall(
-        self.crypto.randomUUID(),
-        [1920, 0],
-        [1920, 1080],
-      ),
-      new Wall(
-        self.crypto.randomUUID(),
-        [0, 1080],
-        [1920, 1080],
-      ),
-    ]
+      new PlayerShooter(self.crypto.randomUUID(), [100, 100], "top"),
+      new Wall(self.crypto.randomUUID(), [0, 0], [0, 1080]),
+      new Wall(self.crypto.randomUUID(), [0, 0], [1920, 0]),
+      new Wall(self.crypto.randomUUID(), [1920, 0], [1920, 1080]),
+      new Wall(self.crypto.randomUUID(), [0, 1080], [1920, 1080]),
+    ];
   }
 }

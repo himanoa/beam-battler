@@ -5,5 +5,5 @@ export interface HasCollider {
 }
 
 export const hasCollider = (c: object): c is HasCollider => {
-  return Object.hasOwn(c, 'collide') != null
-}
+  return Object.hasOwn(c, "collide") != null;
+};

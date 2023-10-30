@@ -1,10 +1,7 @@
 import { match } from "ts-pattern";
 import { Direction, flip } from "./direction";
 import { Renderable } from "./renderable";
-import {
-  Shooter,
-  computeFillColor,
-} from "./shooter";
+import { Shooter, computeFillColor } from "./shooter";
 import { Vector2, addVector } from "./vector2";
 import { CircleHitBox } from "./hit-box";
 import { HasCollider } from "./has-collider";
@@ -35,8 +32,8 @@ export class PlayerShooter implements Renderable, HasCollider, Teleportable {
   }
 
   teleport(v: Vector2) {
-    this.shooter.cordinate = v
-    return this
+    this.shooter.cordinate = v;
+    return this;
   }
 
   move(direction: Direction) {
@@ -119,8 +116,14 @@ export class PlayerShooter implements Renderable, HasCollider, Teleportable {
     ctx.fill();
 
     ctx.moveTo(...this.hitBox.cordinate);
-    ctx.lineTo(...flip(this.hitBox.cordinate, this.shooter.direction, this.hitBox.radius))
-    ctx.strokeStyle = 'black'
+    ctx.lineTo(
+      ...flip(
+        this.hitBox.cordinate,
+        this.shooter.direction,
+        this.hitBox.radius,
+      ),
+    );
+    ctx.strokeStyle = "black";
     ctx.stroke();
   }
 
@@ -142,6 +145,6 @@ export class PlayerShooter implements Renderable, HasCollider, Teleportable {
   }
 
   get collide() {
-    return this.hitBox
+    return this.hitBox;
   }
 }

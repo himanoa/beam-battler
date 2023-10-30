@@ -14,7 +14,15 @@ import {
   toDirection,
 } from "../models/player-actions";
 import Observable from "zen-observable";
-import { filter, fromObservable, subscribe, pipe, Subscription, fromIterable, toArray } from "wonka";
+import {
+  filter,
+  fromObservable,
+  subscribe,
+  pipe,
+  Subscription,
+  fromIterable,
+  toArray,
+} from "wonka";
 import { isPlayerMoveAction } from "../models/game-actions";
 import { flip, not } from "../models/direction";
 import { isMaterial } from "../models/material";
@@ -56,14 +64,18 @@ export class CollisionSimulatorImpl implements CollisionSimulator {
     const np = findNearestPointOnLine(b, a);
     const d = distance(a.cordinate, np);
 
-    return d  <= a.radius;
+    return d <= a.radius;
   }
 
   resolveColider() {
     for (const [a, b] of combinations(
-      pipe(fromIterable(this.visibleEntityRepository), filter(isMaterial) , toArray)
+      pipe(
+        fromIterable(this.visibleEntityRepository),
+        filter(isMaterial),
+        toArray,
+      ),
     )) {
-      const hanpatsu = 6
+      const hanpatsu = 6;
       if (
         a.collide.kind === "circle" &&
         b.collide.kind === "line" &&
@@ -71,8 +83,12 @@ export class CollisionSimulatorImpl implements CollisionSimulator {
         this.isCollided(a.collide, b.collide) &&
         this.lastPlayerActions != null
       ) {
-        const dest = flip(a.collide.cordinate, not(toDirection(this.lastPlayerActions)), hanpatsu)
-        this.visibleEntityRepository.store(a.teleport(dest))
+        const dest = flip(
+          a.collide.cordinate,
+          not(toDirection(this.lastPlayerActions)),
+          hanpatsu,
+        );
+        this.visibleEntityRepository.store(a.teleport(dest));
       }
       if (
         b.collide.kind === "circle" &&
@@ -81,8 +97,12 @@ export class CollisionSimulatorImpl implements CollisionSimulator {
         this.isCollided(b.collide, a.collide) &&
         this.lastPlayerActions != null
       ) {
-        const dest = flip(b.collide.cordinate, not(toDirection(this.lastPlayerActions)), hanpatsu)
-        this.visibleEntityRepository.store(b.teleport(dest))
+        const dest = flip(
+          b.collide.cordinate,
+          not(toDirection(this.lastPlayerActions)),
+          hanpatsu,
+        );
+        this.visibleEntityRepository.store(b.teleport(dest));
       }
     }
   }

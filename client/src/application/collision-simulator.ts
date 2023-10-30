@@ -15,5 +15,5 @@ export interface CollisionSimulator {
   onColide: Observable<ColideEvent>;
   startSimulation(): void;
   closeSimulation(): void;
-  resolveColider(): void
+  resolveColider(): void;
 }
