@@ -12,5 +12,5 @@ export const isPlayerMoveAction = (a: GameActions): a is PlayerMoveActions => {
     "playerMoveUpRight",
     "playerMoveDownLeft",
     "playerMoveDownRight",
-  ].includes(a.kind)
-}
+  ].includes(a.kind);
+};

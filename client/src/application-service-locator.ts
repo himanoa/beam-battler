@@ -16,13 +16,13 @@ const playerController = new PlayerControllerImpl(
 );
 const collisionSimulator: CollisionSimulator = new CollisionSimulatorImpl(
   visibleEntityRepository,
-  playerController.observable
-)
+  playerController.observable,
+);
 
 const worldEmulator = new WorldEmulatorImpl(
   visibleEntityRepository,
   playerController.observable,
-  collisionSimulator.onColide
+  collisionSimulator.onColide,
 );
 
 export const applicationServiceLocator: ServiceLocator = {
@@ -33,6 +33,6 @@ export const applicationServiceLocator: ServiceLocator = {
     keyboardInputStream,
     playerController,
     worldEmulator,
-    collisionSimulator
+    collisionSimulator,
   ),
 };

@@ -1,16 +1,16 @@
 import { Vector2 } from "./vector2";
 
 export type CircleHitBox = {
-  kind: 'circle',
+  kind: "circle";
   cordinate: Vector2;
   radius: number;
-}
+};
 
 export type LineHitBox = {
-  kind: 'line'
-  cordinate1: Vector2
-  cordinate2: Vector2
-}
+  kind: "line";
+  cordinate1: Vector2;
+  cordinate2: Vector2;
+};
 
 export type HitBox = CircleHitBox | LineHitBox;
 
@@ -18,7 +18,10 @@ export function fillColor(): string {
   return "red";
 }
 
-export function findNearestPointOnLine(line: LineHitBox, circle: CircleHitBox): Vector2 {
+export function findNearestPointOnLine(
+  line: LineHitBox,
+  circle: CircleHitBox,
+): Vector2 {
   const [x1, y1] = line.cordinate1;
   const [x2, y2] = line.cordinate2;
   const [cx, cy] = circle.cordinate;
@@ -39,10 +42,7 @@ export function findNearestPointOnLine(line: LineHitBox, circle: CircleHitBox): 
   if (t > 1) return line.cordinate2;
 
   // 線分上の最近傍点を計算
-  const nearestPoint: Vector2 = [
-    x1 + t * (x2 - x1),
-    y1 + t * (y2 - y1)
-  ];
+  const nearestPoint: Vector2 = [x1 + t * (x2 - x1), y1 + t * (y2 - y1)];
 
   return nearestPoint;
 }

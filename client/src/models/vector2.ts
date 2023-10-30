@@ -21,6 +21,6 @@ export const divVector: (v1: Vector2, v2: Vector2) => Vector2 = (v1, v2) => {
 };
 
 export const distance: (v1: Vector2, v2: Vector2) => number = (v1, v2) => {
-  const c = subVector(v1, v2)
-  return map(c, ([x,y]) => Math.sqrt(x * x) + (y * y))
-}
+  const c = subVector(v1, v2);
+  return map(c, ([x, y]) => Math.sqrt(x * x) + y * y);
+};

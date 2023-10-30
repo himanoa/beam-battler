@@ -13,7 +13,7 @@ export class Kernel {
     private keyboardInputStream: KeyboardInputStream,
     private playerController: PlayerController,
     private worldEmulator: WorldEmulator,
-    private collisionSimulator: CollisionSimulator
+    private collisionSimulator: CollisionSimulator,
   ) {}
 
   start(canvasCtx: CanvasRenderingContext2D) {

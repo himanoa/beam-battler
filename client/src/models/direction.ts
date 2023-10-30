@@ -9,5 +9,5 @@ export type Direction =
   | "bottom-right";
 
 export const reverseDirection = (d: Direction): Direction => {
-  throw new Error("unimplemented")
-}
+  throw new Error("unimplemented");
+};

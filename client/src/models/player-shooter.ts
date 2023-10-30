@@ -155,13 +155,13 @@ export class PlayerShooter implements X {
     );
 
     return {
-      kind: 'circle',
+      kind: "circle",
       cordinate: point,
       radius: 8,
     };
   }
 
   get collide() {
-    return this.hitBox
+    return this.hitBox;
   }
 }

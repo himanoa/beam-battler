@@ -14,7 +14,7 @@ export class WorldEmulatorImpl implements WorldEmulator {
   constructor(
     private playerRepository: VisibleEntityRepository,
     private playerStream: Observable<PlayerActions>,
-    private onColide: Observable<ColideEvent>
+    private onColide: Observable<ColideEvent>,
   ) {}
 
   emulate() {
@@ -32,17 +32,17 @@ export class WorldEmulatorImpl implements WorldEmulator {
             return player.changeDirection(payload);
           })
           .otherwise((e) => {
-            if(isPlayerMoveAction(e)) {
-              return player.move(toDirection(e))
+            if (isPlayerMoveAction(e)) {
+              return player.move(toDirection(e));
             }
-            return player
+            return player;
           }),
       );
     });
 
     this.onColide.subscribe(() => {
-      console.error("unimplemented colide handle")
-    })
+      console.error("unimplemented colide handle");
+    });
   }
 
   closeEmulator() {
