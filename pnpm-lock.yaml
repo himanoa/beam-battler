@@ -77,6 +77,9 @@ importers:
       '@kanamone/scrambler':
         specifier: 0.0.9
         version: 0.0.9
+      hono-do:
+        specifier: 0.2.1
+        version: 0.2.1
     devDependencies:
       '@cloudflare/workers-types':
         specifier: ^4.20230419.0
@@ -1848,10 +1851,15 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /hono-do@0.2.1:
+    resolution: {integrity: sha512-BjANtsnHuLefqtWpuDjg07y89SGkHd5Ss5KFRB5kJeV/cgSzIOACw+VY7jY0rPtOM6zCUm4t3izms+5qLdM7bA==}
+    dependencies:
+      hono: 3.9.0
+    dev: false
+
   /hono@3.9.0:
     resolution: {integrity: sha512-MSGmerYD69jwDkBa631lY7y3xtEwbKFg2huFZ0TruzCdfJlmPd/rFzyvmMheePKsiA7CZp/KqL3mflBOzEmjLA==}
     engines: {node: '>=16.0.0'}
-    dev: true
 
   /ignore@5.2.4:
     resolution: {integrity: sha512-MAb38BcSbH0eHNBxn7ql2NH/kX33OkB3lZ1BNdh7ENeRChHTYsTvWrMubiIAMNS2llXEEgZ1MUOBtXChP3kaFQ==}

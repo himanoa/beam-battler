@@ -5,16 +5,28 @@ import { prettyJSON } from 'hono/pretty-json';
 
 import { hc } from './hc';
 
-const app = new Hono();
+type Bindings = {
+	ROOM: DurableObjectNamespace
+}
+
+const app = new Hono<{Bindings: Bindings}>();
 
 app.use('*', prettyJSON());
 app.use('*', logger());
 app.use('*', cors());
 
-app.get('*', async (c) => {
+app.route('/', hc);
+
+app.all("/room/*", (c) => {
+	const id = c.env.ROOM.idFromName("Room")
+	const obj = c.env.ROOM.get(id)
+	return obj.fetch(c.req.raw)
+})
+
+app.all('*', async (c) => {
 	return c.json({}, 404);
 });
 
-app.route('/', hc);
 
 export default app;
+export * from './room-durable-object'

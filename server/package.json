@@ -13,16 +13,17 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20230419.0",
-    "hono": "^3.9.0",
-    "typescript": "^5.0.4",
-    "wrangler": "^3.0.0",
     "@typescript-eslint/eslint-plugin": "6.9.0",
     "@typescript-eslint/parser": "6.9.0",
     "eslint": "8.52.0",
     "eslint-config-prettier": "9.0.0",
-    "prettier": "3.0.3"
+    "hono": "^3.9.0",
+    "prettier": "3.0.3",
+    "typescript": "^5.0.4",
+    "wrangler": "^3.0.0"
   },
   "dependencies": {
-    "@kanamone/scrambler": "0.0.9"
+    "@kanamone/scrambler": "0.0.9",
+    "hono-do": "0.2.1"
   }
 }
