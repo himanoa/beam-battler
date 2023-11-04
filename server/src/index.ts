@@ -17,10 +17,12 @@ app.use('*', cors());
 
 app.route('/', hc);
 
-app.all("/room/*", (c) => {
+app.all("/room/*", async (c) => {
 	const id = c.env.ROOM.idFromName("Room")
 	const obj = c.env.ROOM.get(id)
-	return obj.fetch(c.req.raw)
+	const resp =  await obj.fetch(c.req.raw)
+	const body = await resp.json()
+	return c.json(body)
 })
 
 
