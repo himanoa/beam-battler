@@ -23,10 +23,6 @@ app.all("/room/*", (c) => {
 	return obj.fetch(c.req.raw)
 })
 
-app.all('*', async (c) => {
-	return c.json({}, 404);
-});
-
 
 export default app;
 export * from './room-durable-object'

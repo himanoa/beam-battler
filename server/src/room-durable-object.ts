@@ -16,17 +16,19 @@ export const Room = generateHonoObject("/room", async (app, state) => {
 		stages: 100
 	})
 
-	app.get("/", (c) => {
-		console.dir('x')
-		const id = scrambler.scramble(BigInt(parseInt(crypto.randomUUID().replaceAll("-", ""), 10)))
-		storage.put<Room>(id.toString(), { participant: [] })
+	app.post("", (c) => {
+		console.log('succ')
+		return c.text("succ")
+		return c.json({}, 200)
+		console.log('x')
+		const uuid = crypto.randomUUID().replaceAll("-", "")
+		console.log(uuid)
+		return c.json({}, 200)
+		const id = scrambler.scramble(BigInt(parseInt(uuid, 16)))
 		return c.json({ roomId: id.toString() }, 200)
-	})
-	app.post("/", (c) => {
-		console.dir('x')
-		const id = scrambler.scramble(BigInt(parseInt(crypto.randomUUID().replaceAll("-", ""), 10)))
-		console.dir('xxx')
+		console.log(id)
 		storage.put<Room>(id.toString(), { participant: [] })
+		console.log(id)
 		return c.json({ roomId: id.toString() }, 200)
 	})
 })
